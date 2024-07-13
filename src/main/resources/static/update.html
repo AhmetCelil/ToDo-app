@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Update ToDo</title>
+  <style>
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    h1, h2 {
+      color: #333;
+    }
+
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      width: 300px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #555;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+<h1>Update ToDo</h1>
+<form id="updateToDoForm">
+  <input type="hidden" id="updateId" name="updateId">
+  <label for="updateYapilacakIs">ToDo:</label>
+  <input type="text" id="updateYapilacakIs" name="updateYapilacakIs"><br><br>
+  <label for="updateTarih">Date:</label>
+  <input type="text" id="updateTarih" name="updateTarih"><br><br>
+  <label for="updateSure">Duration:</label>
+  <input type="text" id="updateSure" name="updateSure"><br><br>
+  <button type="submit">Update ToDo</button>
+</form>
+
+<script>
+  async function loadToDo() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+
+    if (id) {
+      const response = await fetch(`/api/to_do/${id}`);
+      const toDo = await response.json();
+
+      document.getElementById('updateId').value = toDo.id;
+      document.getElementById('updateYapilacakIs').value = toDo.yapilacakIs;
+      document.getElementById('updateTarih').value = toDo.tarih;
+      document.getElementById('updateSure').value = toDo.sure;
+    }
+  }
+
+  async function updateToDo(event) {
+    event.preventDefault();
+    const form = document.getElementById('updateToDoForm');
+    const formData = new FormData(form);
+    const toDo = {
+      id: formData.get('updateId'),
+      yapilacakIs: formData.get('updateYapilacakIs'),
+      tarih: formData.get('updateTarih'),
+      sure: formData.get('updateSure')
+    };
+
+    await fetch(`/api/to_do/${toDo.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(toDo)
+    });
+
+    form.reset();
+    window.location.href = 'index.html'; // Güncelleme sonrası ana sayfaya yönlendir
+  }
+
+  document.getElementById('updateToDoForm').addEventListener('submit', updateToDo);
+  loadToDo();
+</script>
+</body>
+</html>
