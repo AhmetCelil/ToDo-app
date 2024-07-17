@@ -27,7 +27,10 @@ public class ToDoService {
     }
 
     public ToDo saveToDo(ToDo toDo) {
-        return toDoRepo.save(toDo);    //kayıt
+        if (toDo.getSure() != null && !toDo.getSure().isEmpty() && toDo.getTarih() != null  && toDo.getYapilacakIs() != null && !toDo.getYapilacakIs().isEmpty()) {
+            return toDoRepo.save(toDo);
+        }
+        else return null;
     }
 
     public void deleteToDoById(Long id) {

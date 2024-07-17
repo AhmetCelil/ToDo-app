@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.Date;
+
 @Data
 @Getter
 @Setter
@@ -19,5 +21,5 @@ public class ToDo {
 
     private String yapilacakIs;
     private String Sure;
-    private String tarih;
+    private Date tarih;
 }

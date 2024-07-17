@@ -35,10 +35,7 @@ public class ToDoController {
     @PostMapping
     public ToDo CreateToDo(@RequestBody ToDo todo) {
         System.out.println("veri eklendi...\nID numarası: "+ todo.getId());
-        if(todo.getTarih() != null && !todo.getTarih().isEmpty()&& todo.getSure() != null && todo.getYapilacakIs() != null){
-            return todoservice.saveToDo(todo);
-        }
-        return null;
+        return todoservice.saveToDo(todo);
     }
 
     ///////////////////////GUNCELLEME ISLEMLERI
