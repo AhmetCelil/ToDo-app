@@ -17,8 +17,6 @@ public class ToDoController {
 
     /////////////////////////GET ISLEMLERIı
 
-
-
     @GetMapping // veri tabnında bulunan nesneleri listelemek için kullanılır
     public List<ToDo> getAlltoDo() {
         System.out.println("VERİLER LİSTELENDİ...");
@@ -37,7 +35,10 @@ public class ToDoController {
     @PostMapping
     public ToDo CreateToDo(@RequestBody ToDo todo) {
         System.out.println("veri eklendi...\nID numarası: "+ todo.getId());
-        return todoservice.saveToDo(todo);
+        if(todo.getTarih() != null && !todo.getTarih().isEmpty()&& todo.getSure() != null && todo.getYapilacakIs() != null){
+            return todoservice.saveToDo(todo);
+        }
+        return null;
     }
 
     ///////////////////////GUNCELLEME ISLEMLERI

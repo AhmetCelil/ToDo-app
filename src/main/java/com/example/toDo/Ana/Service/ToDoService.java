@@ -12,8 +12,11 @@ import java.util.List;
 @Service
 public class ToDoService {
 
-    @Autowired
-    public ToDoRepo toDoRepo;
+    private final ToDoRepo toDoRepo;
+
+    public ToDoService(ToDoRepo toDoRepo) {
+        this.toDoRepo = toDoRepo;
+    }
 
     public List<ToDo> getAllToDo() {
         return toDoRepo.findAll();

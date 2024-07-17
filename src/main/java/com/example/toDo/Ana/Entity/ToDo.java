@@ -4,7 +4,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
+@Data
+@Getter
+@Setter
 @Entity
 public class ToDo {
     @Id
@@ -14,36 +20,4 @@ public class ToDo {
     private String yapilacakIs;
     private String Sure;
     private String tarih;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getYapilacakIs() {
-        return yapilacakIs;
-    }
-
-    public void setYapilacakIs(String yapilacakIs) {
-        this.yapilacakIs = yapilacakIs;
-    }
-
-    public String getSure() {
-        return Sure;
-    }
-
-    public void setSure(String sure) {
-         Sure = sure;
-    }
-
-    public String getTarih() {
-        return tarih;
-    }
-
-    public void setTarih(String tarih) {
-        this.tarih = tarih;
-    }
 }
