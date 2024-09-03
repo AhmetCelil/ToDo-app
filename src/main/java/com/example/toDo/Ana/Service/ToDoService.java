@@ -2,10 +2,10 @@ package com.example.toDo.Ana.Service;
 
 import com.example.toDo.Ana.Entity.ToDo;
 import com.example.toDo.Ana.Repo.ToDoRepo;
-
+import com.example.toDo.Ana.dto.ToDoDTO;
 import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import java.sql.Date;
 import java.util.List;
 
 
@@ -41,4 +41,19 @@ public class ToDoService {
         int offset = page * size;
         return toDoRepo.findToDosByPage(size, offset);
     }
+
+    // DTO'yu alıp bir ToDo'ya çevirir ve kaydeder
+    public ToDoDTO createToDoDTO(ToDoDTO toDoDTO) {
+        ToDo todo = new ToDo();
+        todo.setYapilacakIs(toDoDTO.getYapicalacakIs());
+        todo.setSure(toDoDTO.getSure());
+        todo.setTarih(Date.valueOf(toDoDTO.getTarih()));
+
+        // ToDo kaydedilir (veritabanına veya başka bir katmana)
+        toDoRepo.save(todo);
+
+        // DTO olarak döndürülür
+        return toDoDTO;
+    }
+
 }

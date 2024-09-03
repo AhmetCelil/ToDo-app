@@ -1,9 +1,6 @@
 package com.example.toDo.Ana.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,10 +13,12 @@ import java.sql.Date;
 @Entity
 public class ToDo {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE )
     private Long id;
 
     private String yapilacakIs;
     private String Sure;
+
+    @Column(name = "Date")
     private Date tarih;
 }

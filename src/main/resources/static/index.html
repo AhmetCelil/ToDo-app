@@ -68,9 +68,9 @@
         }
     </style>
 </head>
+
 <body>
 <h1>ToDo List</h1>
-
 <table id="toDoList">
     <thead>
     <tr>
@@ -84,7 +84,6 @@
     <!-- ToDo öğeleri burada eklenecek -->
     </tbody>
 </table>
-
 <h2>Create ToDo</h2>
 <form id="createToDoForm">
     <label for="yapilacakIs">ToDo:</label>
@@ -95,7 +94,6 @@
     <input type="text" id="sure" name="sure"><br><br>
     <button type="submit">Create ToDo</button>
 </form>
-
 <script>
     async function fetchToDos() {
         const response = await fetch('/api/to_do'); // get isteği atılır

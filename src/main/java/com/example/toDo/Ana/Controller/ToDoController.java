@@ -2,6 +2,7 @@ package com.example.toDo.Ana.Controller;
 
 import com.example.toDo.Ana.Entity.ToDo;
 import com.example.toDo.Ana.Service.ToDoService;
+import com.example.toDo.Ana.dto.ToDoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,6 @@ public class ToDoController {
 
 
     /////////////////////////GET ISLEMLERIı
-
     @GetMapping // veri tabnında bulunan nesneleri listelemek için kullanılır
     public List<ToDo> getAlltoDo() {
         System.out.println("VERİLER LİSTELENDİ...");
@@ -37,12 +37,15 @@ public class ToDoController {
         System.out.println("veri eklendi...\nID numarası: "+ todo.getId());
         return todoservice.saveToDo(todo);
     }
+    @PostMapping("/ekle-dto")
+    public ToDoDTO createToDoDTO(@RequestBody ToDoDTO toDoDTO) {
+        return todoservice.createToDoDTO(toDoDTO);
+    }
 
     ///////////////////////GUNCELLEME ISLEMLERI
     @PutMapping("/{id}")
     public ToDo UpdateToDo(@PathVariable Long id, @RequestBody ToDo todo) {
         return todoservice.saveToDo(todo);
-
     }
 
 
